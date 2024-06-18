@@ -1,0 +1,27 @@
+dist/
+tmp/
+out-tsc/
+bazel-out/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Angular
+.angular/
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# Miscellaneous
+.sass-cache/
+*.log
+*.swp
+*.swo
+*.lock
+
+# System files
+.DS_Store
+Thumbs.db

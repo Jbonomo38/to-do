@@ -1,0 +1,26 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "description": "to-do list",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "console.log('test);",
+    "start": "node index.js",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jbonomo38/to-do.git"
+  },
+  "author": "Bonomo, Jack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jbonomo38/to-do/issues"
+  },
+  "homepage": "https://github.com/Jbonomo38/to-do#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.6.0",
+    "webpack": "^5.92.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
