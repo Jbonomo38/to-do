@@ -7,7 +7,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Production",
+      title: "Project Manager",
+      template: "./src/template.html",
+      filename: "index.html",
     }),
   ],
   output: {
