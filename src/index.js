@@ -1,7 +1,7 @@
 import "./styles.css";
-import { Project, toDoItem } from './objects.js';
-import { saveNewProject, updateProject, cleanDB } from './storage.js';
-import { displayProject, editProject, updateProjectHtml, deleteProject } from "./display.js";
+import { Project, ToDoItem } from './objects.js';
+import { saveNewProject, updateProject, getProjectByID, cleanDB } from './storage.js';
+import { displayProject, editProject, updateProjectHtml, deleteProject, displayToDoList, displayToDoItem } from "./display.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const projectsContainer = document.getElementById('projects-container');
@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(Object.keys(localStorage).length === 0) {
-        const defaultProject = new Project(0, "Project #1", "Add description here", "06/19/2024", 0, []);
+        const defaultProject = new Project(0, "Project #1", "Add description here", "06/19/2024", 0, [
+            new ToDoItem(0, "title", "description", "today", "1"),
+            new ToDoItem(1, "title2", "description2", "tomorrow", "2")
+        ]);
         saveNewProject(defaultProject);
         displayProject(defaultProject, projectsContainer);
     } else {
@@ -55,14 +58,25 @@ function attachEventListeners() {
         } else if (event.target.classList.contains('delete')) {
             deleteProject(projectID);
         } else if (event.target.classList.contains('toggle-todos')) {
-            const todoList = projectElement.querySelector('.todo-list');
-            todoList.classList.toggle('show');
+            displayToDoList(projectID);
+        }
+    });
+
+    projectsContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('edit-todo')) {
+            const todoItem = event.target.closest('.todo-item');
+            const projectElement = event.target.closest('.project');
+            if (todoItem && projectElement) {
+                const projectID = projectElement.dataset.projectID;
+                const todoID = todoItem.dataset.todoID; // Assuming you add this attribute
+                // editTodoItem(projectID, todoID);
+            }
         }
     });
 
     const newProjectButton = document.getElementById('new-project');
    
-    if (newProjectButton) {
+    if(newProjectButton) {
         newProjectButton.addEventListener('click', () => {
             console.log("New project button clicked");
             const highestID = Object.keys(localStorage).reduce((max, key) => {
@@ -77,6 +91,8 @@ function attachEventListeners() {
     };
 }
 
+console.log(getProjectByID(1));
+
 // cleanDB();
 console.log(localStorage);
-// localStorage.clear();
+localStorage.clear();

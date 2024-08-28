@@ -43,7 +43,8 @@ class Project {
 }
 
 class ToDoItem {
-    constructor(title, description, dueDate, priority){
+    constructor(internalID, title, description, dueDate, priority){
+        this.internalID = String(internalID);
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;

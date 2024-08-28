@@ -50,4 +50,12 @@ function cleanDB() {
     });
 }
 
-export { saveNewProject, updateProject, cleanDB };
+function getProjectByID(projectID) {
+    return JSON.parse(localStorage.getItem(projectID));
+}
+
+function getToDoItemByID(projectID, toDoID) {
+    return getProjectByID(projectID).toDoList.find(toDo => toDo.internalID === toDoID);
+}
+
+export { saveNewProject, updateProject, cleanDB, getProjectByID, getToDoItemByID };

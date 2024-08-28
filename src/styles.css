@@ -121,3 +121,78 @@ header {
     background-color: var(--secondary-color);
     box-shadow: 0 4px 6px rgba(255, 152, 0, 0.4);
 }
+
+.todo-list {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    background-color: var(--surface-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-headers, .todo-item {
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 1fr 2fr;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+
+.todo-headers {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px 5px 0 0;
+}
+
+.todo-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-title {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.todo-description {
+    color: var(--text-secondary-color);
+}
+
+.todo-due-date {
+    color: var(--secondary-color);
+}
+
+.todo-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.todo-actions button, .new-todo-button {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.todo-actions button:hover, .new-todo-button:hover {
+    background-color: var(--primary-color);
+    color: var(--surface-color);
+}
+
+.new-todo-button {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-top: 10px;
+}

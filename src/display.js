@@ -1,4 +1,4 @@
-import { saveNewProject, updateProject } from "./storage";
+import { saveNewProject, updateProject, getProjectByID } from "./storage";
 import { Project } from "./objects";
 
 function displayProject(project, container) {
@@ -23,20 +23,7 @@ function displayProject(project, container) {
               project.internalID
             }">To-Do List</button>
         </div>
-        <div class="todo-list">
-            <ul>
-                ${project.toDoList
-                  .map(
-                    (todo) => `
-                    <li class="todo-item ${todo.completed ? "completed" : ""}">
-                        ${todo.title} - Due: ${todo.dueDate}
-                    </li>
-                `
-                  )
-                  .join("")}
-            </ul>
-        </div>
-    `;
+        `;
 
   container.appendChild(projectElement);
 }
@@ -73,12 +60,14 @@ function switchEditable(bool, projectID) {
   }
 
   Array.from(projectDiv.children).forEach((child) => {
-    if (child.tagName !== "BUTTON") {
+    if (!child.classList.contains('project-actions') && !child.classList.contains('todo-list')) {
       child.contentEditable = bool;
     }
   });
 
-  // Specifically target the edit button
+  // Ensure to-do list items are not editable
+  projectDiv.querySelectorAll('.todo-item').forEach(item => item.contentEditable = false);
+
   const editButton = projectDiv.querySelector(".project-actions .edit");
   if (editButton) {
     editButton.textContent = bool ? "Save" : "Edit";
@@ -87,4 +76,61 @@ function switchEditable(bool, projectID) {
   return projectID;
 }
 
-export { displayProject, editProject, updateProjectHtml, deleteProject };
+function displayToDoList(projectID) {
+  const projectDiv = document.querySelector(`[data-project-i-d="${projectID}"]`);
+  const project = getProjectByID(projectID);
+
+  let todoListContainer = projectDiv.querySelector('.todo-list');
+  if (!todoListContainer) {
+    todoListContainer = document.createElement('div');
+    todoListContainer.classList.add('todo-list');
+    projectDiv.appendChild(todoListContainer);
+  }
+
+  todoListContainer.innerHTML = `
+    <div class="todo-headers">
+      <div class="todo-header-item">Title</div>
+      <div class="todo-header-item">Description</div>
+      <div class="todo-header-item">Due Date</div>
+      <div class="todo-header-item">Priority</div>
+      <div class="todo-header-item">Actions</div>
+    </div>
+    <div class="todo-items"></div>
+  `;
+
+  const todoItemsContainer = todoListContainer.querySelector('.todo-items');
+
+  if (project.toDoList.length) {
+    project.toDoList.forEach((toDo) => {
+      displayToDoItem(toDo, todoItemsContainer);
+    });
+  } else {
+    const newTodoButton = document.createElement('button');
+    newTodoButton.textContent = 'Add New';
+    newTodoButton.classList.add('new-todo-button');
+    todoItemsContainer.appendChild(newTodoButton);
+  }
+}
+
+function displayToDoItem(toDo, todoItemsContainer) {
+  const toDoElement = document.createElement("div");
+  toDoElement.classList.add("todo-item");
+  toDoElement.innerHTML = `
+    <div class="todo-title">${toDo.title}</div>
+    <div class="todo-description">${toDo.description}</div>
+    <div class="todo-due-date">${toDo.dueDate}</div>
+    <div class="todo-priority">${toDo.priority}</div>
+    <div class="todo-actions">
+      <button class="edit-todo" id="${toDo.internalID}">Edit</button>
+      <button class="delete-todo" id="${toDo.internalID}">Delete</button>
+    </div>
+  `;
+  todoItemsContainer.appendChild(toDoElement);
+}
+
+function editToDoItem(projectID, toDoID) {
+    const toDoItem = getToDoItemByID(projectID, toDoID);
+    
+}
+
+export { displayProject, editProject, updateProjectHtml, deleteProject, displayToDoList, displayToDoItem };
