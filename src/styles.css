@@ -1,29 +1,30 @@
 :root {
-    --primary-color: #0047d4;
-    --secondary-color: #ff9800;
-    --background-color: #f5f5f5;
-    --surface-color: #ffffff;
-    --text-color: #333333;
-    --text-secondary-color: #757575;
+    --primary-color: #264653;  /* Dark green */
+    --secondary-color: #2A9D8F; /* Teal */
+    --background-color: #C9E4DE; /* Light mint */
+    --surface-color: #fbf8e4; /* Light beige */
+    --text-color: #264653; /* Dark green */
+    --text-secondary-color: #2A9D8F; /* Teal */
+    --accent-color: #D93A69; /* Pink */
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     background-color: var(--background-color);
 }
 
-.header-item {
+.header-item,
+.todo-header-item {
     text-align: center;
 }
 
 header {
-    background-color: var(--surface-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--surface-color);
     text-align: center;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -40,63 +41,44 @@ header {
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .project-headers {
     font-weight: bold;
-    color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background-color: #0047d4;
+    background-color: var(--primary-color);
+    color: var(--surface-color);
 }
 
-.project {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.project:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
-.project-title {
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-.project-description {
-    color: var(--text-secondary-color);
-}
-
-.project-due-date {
-    color: var(--secondary-color);
-}
-
-.project-priority {
+.project-headers .header-item:last-child,
+.project .project-actions {
     text-align: center;
 }
 
 .project-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 10px;
+    width: 100%;
 }
 
 .project-actions button {
-    background-color: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    flex: 1;
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--surface-color);
     padding: 5px 10px;
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9em;
+    white-space: nowrap;
 }
 
 .project-actions button:hover {
     background-color: var(--primary-color);
-    color: var(--surface-color);
 }
 
 #new-project {
@@ -107,10 +89,10 @@ header {
     text-align: center;
     text-decoration: none;
     color: var(--surface-color);
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     border: none;
     border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 71, 212, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
     margin-top: 20px;
@@ -118,8 +100,7 @@ header {
 }
 
 #new-project:hover {
-    background-color: var(--secondary-color);
-    box-shadow: 0 4px 6px rgba(255, 152, 0, 0.4);
+    background-color: var(--primary-color);
 }
 
 .todo-list {
@@ -140,16 +121,18 @@ header {
 }
 
 .todo-headers {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--surface-color);
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 5px 5px 0 0;
+    font-size: 0.9em;
 }
 
 .todo-item {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(38, 70, 83, 0.1);
+    background-color: var(--surface-color);
 }
 
 .todo-item:last-child {
@@ -162,7 +145,7 @@ header {
 }
 
 .todo-description {
-    color: var(--text-secondary-color);
+    color: var(--text-color);
 }
 
 .todo-due-date {
@@ -171,24 +154,26 @@ header {
 
 .todo-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 5px;
+    width: 100%;
 }
 
 .todo-actions button, .new-todo-button {
-    background-color: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    flex: 1;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--surface-color);
     padding: 5px 10px;
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9em;
+    white-space: nowrap;
 }
 
 .todo-actions button:hover, .new-todo-button:hover {
-    background-color: var(--primary-color);
-    color: var(--surface-color);
+    background-color: var(--secondary-color);
 }
 
 .new-todo-button {

@@ -27,14 +27,28 @@ function updateProject(projectID) {
     storedProject.dueDate = projectDiv.querySelector('.project-due-date').textContent.replace('Due Date: ', '');
     storedProject.priority = projectDiv.querySelector('.project-priority').textContent.replace('Priority: ', '');
 
-    // Update todo list if it exists
-    const todoList = projectDiv.querySelector('ul');
-    if (todoList) {
-        storedProject.toDoList = Array.from(todoList.children).map(li => {
-            const [title, dueDate] = li.textContent.split(' - Due: ');
-            return { title, dueDate };
-        });
+    localStorage.setItem(projectID, JSON.stringify(storedProject));
+}
+
+function updateToDoItem(projectID, toDoID) {
+    const projectDiv = document.querySelector(`[data-project-i-d="${projectID}"]`);
+    const toDoItemDiv = projectDiv?.querySelector(`.todo-item[data-todo-id="${toDoID}"]`);
+    const storedProject = JSON.parse(localStorage.getItem(projectID));
+    console.log("Stored project:", storedProject);
+
+    const toDoItemIndex = storedProject.toDoList.findIndex(item => item.internalID === toDoID);
+    if (toDoItemIndex === -1) {
+        console.error(`To-Do item with ID ${toDoID} not found in project's to-do list`);
+        return;
     }
+
+    storedProject.toDoList[toDoItemIndex] = {
+        ...storedProject.toDoList[toDoItemIndex],
+        title: toDoItemDiv.querySelector('.todo-title').textContent,
+        description: toDoItemDiv.querySelector('.todo-description').textContent,
+        dueDate: toDoItemDiv.querySelector('.todo-due-date').textContent,
+        priority: toDoItemDiv.querySelector('.todo-priority').textContent
+    };
 
     localStorage.setItem(projectID, JSON.stringify(storedProject));
 }
@@ -55,7 +69,8 @@ function getProjectByID(projectID) {
 }
 
 function getToDoItemByID(projectID, toDoID) {
-    return getProjectByID(projectID).toDoList.find(toDo => toDo.internalID === toDoID);
+    const project = getProjectByID(projectID);
+    return project.toDoList.find(toDo => toDo.internalID === toDoID);
 }
 
-export { saveNewProject, updateProject, cleanDB, getProjectByID, getToDoItemByID };
+export { saveNewProject, updateProject, cleanDB, getProjectByID, getToDoItemByID, updateToDoItem };
