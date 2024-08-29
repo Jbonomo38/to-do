@@ -22,8 +22,12 @@
   },
   "homepage": "https://github.com/Jbonomo38/to-do#readme",
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
     "css-loader": "^7.1.1",
     "csv-loader": "^3.0.5",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react": "^7.35.0",
+    "globals": "^15.9.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.0",
     "json5": "^2.2.3",
