@@ -15,8 +15,7 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "docs"),
-    publicPath: '',
-    clean: true,
+    publicPath: '/to-do/',
   },
   module: {
     rules: [
