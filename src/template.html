@@ -4,12 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Project Manager</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-        <base href="/to-do/">
+         <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> -->
+        <!-- <base href="/to-do/"> -->
     </head>
     <body>
         <header>
             <h1 id="app-title" contentEditable="true">Project Manager</h1>
+            <div class="dropdown-container" id="dropdown-container">
+                <div class="button" id="dropdown-button">Menu</div>
+                <div class="dropdown-content" style="display: none;">
+                    <div class="dropdown-item">Delete All</div>
+                    <div class="dropdown-item">Edit All</div>
+                    <div class="dropdown-item">Contact Us</div>
+                </div>
+            </div>
         </header>
         <main>
             <div class="project-headers">
@@ -21,6 +29,24 @@
             </div>
             <div id="projects-container"></div>
             <div class="button" id="new-project">New</div>
+            <div class="carousel-container">
+                <button class="carousel-button" id="carousel-prev">Prev</button>
+                <div class="carousel-images">
+                    <img class="img" src="assets/lebowski.jpg">
+                    <img class="img" src="assets/office_space.jpg">
+                    <img class="img" src="assets/lebowski.jpg">
+                    <img class="img" src="assets/office_space.jpg">
+                    <img class="img" src="assets/lebowski.jpg">
+                </div>
+                <button class="carousel-button" id="carousel-next">Next</button>
+                <div class="carousel-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
         </main>
     </body>
 </html>

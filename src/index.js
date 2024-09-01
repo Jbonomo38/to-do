@@ -1,6 +1,6 @@
 import "./styles.css";
 import { Project, ToDoItem } from './objects.js';
-import { saveNewProject, updateProject, getProjectByID, cleanDB } from './storage.js';
+import { saveNewProject, getProjectByID, cleanDB } from './storage.js'; // eslint-disable-line no-unused-vars
 import { 
     displayProject, 
     editProject, 
@@ -9,10 +9,12 @@ import {
     displayToDoList, 
     displayToDoItem,
     editToDoItem,
-    deleteToDoItem
+    deleteToDoItem,
+    displayDropdown,
 } from "./display.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    initCarousel();
     const projectsContainer = document.getElementById('projects-container');
     if (!projectsContainer) {
         console.error('Projects container not found in the DOM');
@@ -155,6 +157,59 @@ function attachEventListeners() {
             localStorage.setItem(projectID, JSON.stringify(project));
         }
     });
+
+    const dropdownContainer = document.getElementById('dropdown-container');
+    if (dropdownContainer) {
+        dropdownContainer.addEventListener('click', () => {
+            console.log("Dropdown button clicked, index.js");
+            displayDropdown();
+        });
+    } else {
+        console.error('Dropdown container not found when attaching event listeners');
+    }
+}
+
+function initCarousel() {
+    const carousel = document.querySelector('.carousel-images');
+    const images = carousel.querySelectorAll('.img');
+    const prevButton = document.getElementById('carousel-prev');
+    const nextButton = document.getElementById('carousel-next');
+    const dots = document.querySelectorAll('.dot');
+    const totalImages = images.length;
+    console.log("Total images: ", totalImages);
+    let currentIndex = 0;
+    
+    function showImage(index) {
+        carousel.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
+
+    prevButton.addEventListener('click', () => {
+        console.log("Previous button clicked");
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        console.log("Current index: ", currentIndex);
+        showImage(currentIndex);
+    });
+
+    nextButton.addEventListener('click', () => {
+        console.log("Next button clicked");
+        currentIndex = (currentIndex + 1) % totalImages;
+        console.log("Current index: ", currentIndex);
+        showImage(currentIndex);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentIndex = index;
+            console.log("Current index: ", currentIndex);
+            showImage(currentIndex);
+        });
+    });
+
+    showImage(currentIndex-1);
+
 }
 
 console.log(getProjectByID(1));

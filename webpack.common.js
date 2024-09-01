@@ -7,14 +7,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Project Manager",
       template: "./src/template.html",
-      filename: "index.html",
-    }),
+    })
   ],
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "docs"),
+    path: path.resolve(__dirname, "dist"),
     publicPath: '/to-do/',
   },
   module: {

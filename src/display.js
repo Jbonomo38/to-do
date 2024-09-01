@@ -1,11 +1,8 @@
 import {
-  saveNewProject,
   updateProject,
   getProjectByID,
-  getToDoItemByID,
   updateToDoItem,
 } from "./storage";
-import { Project } from "./objects";
 
 function displayProject(project, container) {
   if (!container) {
@@ -168,7 +165,6 @@ function displayToDoItem(toDo, todoItemsContainer) {
 }
 
 function editToDoItem(projectID, toDoID) {
-  const toDoItem = getToDoItemByID(projectID, toDoID);
   switchEditable(true, projectID, toDoID);
 }
 
@@ -194,6 +190,15 @@ function deleteToDoItem(projectID, toDoID) {
   }
 }
 
+function displayDropdown() {
+  const dropdownContent = document.querySelector(".dropdown-content");
+  if(dropdownContent.style.display === "none") {
+    dropdownContent.style.display = "block";
+  } else {
+    dropdownContent.style.display = "none";
+  }
+}
+
 export {
   displayProject,
   editProject,
@@ -203,4 +208,5 @@ export {
   displayToDoItem,
   editToDoItem,
   deleteToDoItem,
+  displayDropdown,
 };

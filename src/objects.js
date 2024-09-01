@@ -1,5 +1,4 @@
-import { saveNewProject, updateProject } from "./storage";
-import { displayProject } from "./display";
+import { updateProject } from "./storage";
 
 class Project {
     constructor(internalID, title, description, dueDate, priority, toDoList){

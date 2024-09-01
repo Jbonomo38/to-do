@@ -1,5 +1,3 @@
-import { Project, toDoItem } from './objects.js';
-
 function saveNewProject (project) {
     if(localStorage.getItem(project.internalID)) {
         console.log(`Project already exists: ${project.internalID}`);
