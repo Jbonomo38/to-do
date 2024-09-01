@@ -1,5 +1,4 @@
 dist/
-docs/
 tmp/
 out-tsc/
 bazel-out/
